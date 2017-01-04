@@ -1,0 +1,31 @@
+package base.menge.e;
+
+import base.menge.GrundMenge;
+import base.structure.Tupel;
+
+public class ESerie extends EreignisMenge {
+
+	public ESerie(GrundMenge gm, int times) {
+		super(gm, times);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public double p() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected boolean elementOf(Tupel t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public double size() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

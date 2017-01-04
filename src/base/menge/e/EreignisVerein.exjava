@@ -1,0 +1,84 @@
+package base.menge.e;
+
+import java.util.Iterator;
+
+import base.structure.Tupel;
+
+public class EreignisVerein  extends EreignisMenge{
+	private EreignisMenge a, b;
+	EreignisVerein(EreignisMenge A, EreignisMenge B) {
+		super(A.gm,
+				A.times() < B.times() ? B.times() : A.times());
+		a = A;
+		b = B;
+	}
+
+	@Override
+	public double p() {
+		double pA_B = 0;
+		for(Tupel t : a){
+			if(t.equals(Tupel.create(3,0,2,1)));
+			if(b.isIn(t)){
+				pA_B += gm.p(t);
+			}
+		}
+		return a.p() + b.p() - pA_B;
+	}
+
+	@Override
+	public Iterator<Tupel> iterator() {
+		return new VereinIterator();
+	}
+
+	@Override
+	protected boolean elementOf(Tupel t) {
+		return a.isIn(t) || b.isIn(t);
+	}
+
+	@Override
+	public double size() {
+		double pA_B = 0;
+		for(@SuppressWarnings("unused") Tupel t : this){
+			pA_B++;
+		}
+		return pA_B ;
+	}
+	public static Ereignis Verein(Ereignis a, Ereignis b, Ereignis a_b){
+		return (()->a.p() + b.p() - a_b.p());
+	}
+	public static EreignisMenge Verein(EreignisMenge a, EreignisMenge b){
+		if(a.gm!=b.gm)return null;
+		if(a.times()!=b.times()) return null;
+		return new EreignisVerein(a,b);
+	}
+	class VereinIterator implements Iterator<Tupel>{
+		Iterator<Tupel> it;
+		boolean onA ;
+		Tupel t;
+		VereinIterator(){
+			it = a.iterator();
+			onA = true;
+			next();
+		}
+		@Override
+		public boolean hasNext() {
+			if(onA)return true;
+			return (t!=null && !a.isIn(t));
+		}
+
+		@Override
+		public Tupel next() {
+			Tupel old = t;
+			t=  it.next();
+			if(onA && !it.hasNext()){
+				it = b.iterator();
+				onA = false;
+			}
+			else if(!onA){
+				if(a.isIn(t)) t = next();
+			}
+			return old;
+		}
+		
+	}
+}

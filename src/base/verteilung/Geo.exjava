@@ -1,0 +1,42 @@
+package base.verteilung;
+
+import base.structure.Tupel;
+
+public class Geo  implements Verteilung{
+	private double p,q;
+	private int[] einsen;
+	public Geo(double p, int... eins){
+		if(p>1.)
+			p= 1.;
+		else if(p<0.){
+			p = 0.;
+		}
+		
+		this.p = p;
+		q = 1. - p;
+		einsen = eins;
+	}
+
+	@Override
+	public double p(Tupel t) {
+		double p = 1.;
+		for(int i : t){
+			double tempP = p(i);
+			if(tempP == q){
+				return p *= p;
+			}
+			p*= tempP;
+		}
+		return p;
+	}
+
+	@Override
+	public double p(int i) {
+		for(int eins : einsen){
+			if(i == eins){
+				return p;
+			}
+		}
+		return q;
+	}
+}
