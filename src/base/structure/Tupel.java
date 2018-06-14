@@ -15,6 +15,19 @@ public class Tupel implements Iterable<Integer> {
 		t.add(is);
 		return t;
 	}
+	public static Tupel bereichEinschliesslich(int von, int bis) {
+		if(von > bis) {
+			//switch
+			int t = bis;
+			bis = von;
+			von  = t;
+		}
+		Tupel t = new Tupel(bis - von +1); 
+		for(int i = von; i <= bis; i++) {
+			t.add(i);
+		}
+		return t;
+	}
 	public void add(int value){
 		if(counter >= n)return;
 		else arr[counter]=value;
@@ -102,6 +115,7 @@ public class Tupel implements Iterable<Integer> {
 		}
 		return true;
 	}
+	
 	@Override
 	public Iterator<Integer> iterator() {
 		return new TupelIt();

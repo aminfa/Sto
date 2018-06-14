@@ -22,10 +22,10 @@ public class WurfelTest {
 	public void test() {
 		int n = 6;
 		wurfel = new StichProbe(n,1,true, new Laplace(n));
-		EreignisMenge grade = wurfel.draw(t -> { return t.get(0) % 2 ==0 ;});
-		EreignisMenge zwei = wurfel.draw(t -> { return t.get(0)  ==2 ;});
+		EreignisMenge grade = wurfel.draw(t -> { return t.get(0) % 2 == 0 ;});
+		EreignisMenge zwei = wurfel.draw(t -> { return t.get(0)  == 2 ;});
 		
-		//Wahrscheinlich wahr = new Lap(wurfel, new Laplace(wurfel.Macht));
+//		Wahrscheinlich wahr = new Lap(wurfel, new Laplace(wurfel.Macht));
 		
 		if(grade.p()!= 0.5)
 			fail();

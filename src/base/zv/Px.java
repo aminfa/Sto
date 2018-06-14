@@ -24,6 +24,17 @@ public class Px implements Iterable<Double>{
 		this.x=x;
 		dichte = calcDichte();
 	}
+	
+	public static Px bernoulli(GrundMenge gm, Tupel trefferTupel) {
+		return new Px(gm, t -> {
+			for(int i : trefferTupel) {
+				if(i == t.get(0)) {
+					return 1.;
+				}
+			}
+			return 0.;
+		});
+	}
 
 	public ESet p(Function<Double, Boolean> fn){
 		TupelContainer tc = new TupelContainer();
